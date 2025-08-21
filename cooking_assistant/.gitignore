@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints/
+
+# Virtual env
+venv/
+ENV/
+env/
+*.egg-info/
+
+# VSCode/PyCharm
+.vscode/
+.idea/
+
+# Large model files (FAISS + metadata)
+assistant/data/faiss_index_recipe_embeddings.index
+assistant/data/recipe_metadata.json

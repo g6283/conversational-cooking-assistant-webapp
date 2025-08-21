@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChefMate - Cooking Assistant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/assistant.css' %}" />
+</head>
+<body>
+  {% csrf_token %}
+
+  <div id="assistantContainer" class="chat-container">
+    <div class="chat-header">
+      <div class="header-content">
+        <span class="chat-title">ChefMate</span>
+        <span class="chat-subtitle">Your Personal Cooking Assistant</span>
+      </div>
+      <div class="header-icons">
+        <i class="fas fa-utensils"></i>
+      </div>
+    </div>
+    <div class="chat-messages" id="assistantMessages"></div>
+
+    <!-- Overlay to block input while processing -->
+    <div id="inputBlocker" class="input-blocker" style="display:none;"></div>
+
+    <div class="chat-controls">
+      <div class="input-group">
+        <input id="textInput" placeholder="What ingredients do you have today?" autocomplete="off" />
+        <button id="toggleMode" class="mode-toggle" aria-label="Toggle voice input">
+          <i class="fas fa-microphone"></i>
+        </button>
+      </div>
+      <div class="modification-buttons">
+        <button class="mod-button" data-mod="spicy">
+          <i class="fas fa-pepper-hot"></i> Spicier
+        </button>
+        <button class="mod-button" data-mod="vegan">
+          <i class="fas fa-leaf"></i> Vegan
+        </button>
+        <button class="mod-button" data-mod="quick">
+          <i class="fas fa-bolt"></i> Quicker
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Templates -->
+  <template id="typingIndicatorTemplate">
+    <div class="typing-indicator">
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+    </div>
+  </template>
+
+  <template id="recipeCardTemplate">
+    <div class="recipe-card">
+      <div class="recipe-content">
+        <div class="recipe-title"></div>
+        <div class="recipe-meta">
+          <span class="recipe-time"><i class="fas fa-clock"></i> <span class="time-value"></span></span>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="recipeDetailTemplate">
+    <div class="recipe-detail">
+        <div class="recipe-header">
+            <h2 class="recipe-title"></h2>
+            <div class="recipe-meta">
+                <span class="recipe-time"><i class="fas fa-clock"></i> <span class="time-value"></span></span>
+            </div>
+        </div>
+        <div class="recipe-body">
+            <div class="recipe-section ingredients-section">
+                <h3 class="section-title"><i class="fas fa-carrot"></i> Ingredients</h3>
+                <ul class="ingredients-list"></ul>
+            </div>
+            <div class="recipe-section instructions-section">
+                <h3 class="section-title"><i class="fas fa-list-ol"></i> Instructions</h3>
+                <ol class="recipe-steps"></ol> <!-- Changed from ul to ol for numbered steps -->
+            </div>
+        </div>
+    </div>
+  </template>
+
+  <script src="{% static 'js/assistant.js' %}"></script>
+</body>
+</html>
